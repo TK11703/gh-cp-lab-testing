@@ -66,6 +66,16 @@ describe('request helpers', () => {
       expect(filterRequests(requests, '', 'Medium')).toEqual([])
     })
 
+    it('returns no matches for incompatible filters and restores the queue when cleared', () => {
+      const queue = Object.freeze([...requests])
+
+      expect(filterRequests(queue, 'Open')).toEqual([requests[0]])
+      expect(filterRequests(queue, '', 'Low')).toEqual([requests[1]])
+      expect(filterRequests(queue, 'Open', 'Low')).toEqual([])
+      expect(filterRequests(queue, '', '')).toEqual(requests)
+      expect(queue).toEqual(requests)
+    })
+
     it('retains missing and unexpected values only when their field is unfiltered', () => {
       const queue = [
         { status: 'Unknown', priority: 'High' },
