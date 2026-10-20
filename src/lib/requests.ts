@@ -1,4 +1,9 @@
-import type { NewServiceRequest, ServiceRequest } from '../types'
+import type {
+  NewServiceRequest,
+  RequestPriority,
+  RequestStatus,
+  ServiceRequest,
+} from '../types'
 
 export const initialRequests: ServiceRequest[] = [
   {
@@ -54,6 +59,18 @@ export function createRequest(
     status: 'Open',
     submittedAt: new Date().toISOString(),
   }
+}
+
+export function filterRequests<T extends { status?: unknown; priority?: unknown }>(
+  requests: readonly T[],
+  status: RequestStatus | '' = '',
+  priority: RequestPriority | '' = '',
+): T[] {
+  return requests.filter(
+    (request) =>
+      (status === '' || request.status === status) &&
+      (priority === '' || request.priority === priority),
+  )
 }
 
 export function summarizeRequests(requests: ServiceRequest[]) {

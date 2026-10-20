@@ -152,6 +152,29 @@ main {
   gap: 14px;
 }
 
+.queue-filters {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-field {
+  display: grid;
+  flex: 1 1 150px;
+  gap: 8px;
+  min-width: 0;
+}
+
+.queue-empty {
+  background: var(--background);
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  color: var(--text-muted);
+  padding: 18px;
+}
+
 .request-card {
   border: 1px solid var(--border);
   border-radius: 12px;
